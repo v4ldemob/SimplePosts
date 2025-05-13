@@ -16,9 +16,10 @@ const Posts: FC = () => {
 
   const navigation = useNavigation()
   const token = useTokenStore(state => state.token);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const [count, setCount] = useState(COUNT_POSTS);
-  const { data, isLoading, isFetching, isError } = usePosts(token, count);
+  const { data, isLoading, isFetching, isError, refetch } = usePosts(token, count);
 
   const previousData = useRef<Items[]>([]);
   const posts: Items[] = data ?? previousData.current;
@@ -40,11 +41,20 @@ const Posts: FC = () => {
     Alert.alert(STRINGS.errorTitle, STRINGS.errorTokenValidateDescription);
   }
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    setCount(COUNT_POSTS);
+    await refetch();
+    setIsRefreshing(false);
+  };
+
   return (
     <DefaultLayout>
       <View style={{ ...tw`flex-1`, padding: 16, backgroundColor: COLORS.whitetheme }}>
         <FlashList
           data={posts}
+          refreshing={isRefreshing}
+          onRefresh={handleRefresh}
           estimatedItemSize={100}
           disableAutoLayout={true}
           keyExtractor={(item) => item.id.toString()}
