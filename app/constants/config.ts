@@ -1,0 +1,1 @@
+export const API_POSTS_FEED_URL = 'https://api.lo.ink/v1/posts/feed';
