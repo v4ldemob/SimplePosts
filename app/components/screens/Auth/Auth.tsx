@@ -21,7 +21,7 @@ const Auth: FC = () => {
             },
             onError: (data) => {
                 console.log('Ошибка:', data);
-                Alert.alert('Ошибка', 'Неверный токен или ошибка сети');
+                Alert.alert(STRINGS.errorTitle, STRINGS.errorTokenValidateDescription);
             },
         });
     }
@@ -44,8 +44,9 @@ const Auth: FC = () => {
                         style={{ ...tw`w-full` }}
                         onPress={navigateToPosts}>
                         <View style={{ ...tw`bg-[#3c3cb3] rounded-[4] w-full p-4 items-center justify-center` }}>
-                            {status === 'pending' ? <ActivityIndicator size="small" color="#fff" /> : <Text style={{ ...tw`text-white font-medium` }}>{STRINGS.buttonContinue}</Text>}
-                            {/* <Text style={{ ...tw`text-white font-medium` }}>{STRINGS.buttonContinue}</Text> */}
+                            {status === 'pending' ?
+                                <ActivityIndicator size="small" color="#fff" />
+                                : <Text style={{ ...tw`text-white font-medium` }}>{STRINGS.buttonContinue}</Text>}
                         </View>
                     </TouchableOpacity> : null}
                 </View>

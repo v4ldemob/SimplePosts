@@ -13,8 +13,8 @@ const Navigation: FC = () => {
     return (
         <NavigationContainer ref={ref}>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Posts" component={Posts} />
                 <Stack.Screen name="Auth" component={Auth} />
+                <Stack.Screen name="Posts" component={Posts} />
             </Stack.Navigator>
         </NavigationContainer>
     )
